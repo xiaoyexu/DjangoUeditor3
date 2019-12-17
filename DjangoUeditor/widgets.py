@@ -147,14 +147,12 @@ class UEditorWidget(forms.Textarea):
             uSettings["commands"] = cmdjs
 
         uSettings["settings"] = self.ueditor_settings.copy()
-        
         controllerUrl = '/ueditor/controller/?%s'
         if hasattr(settings, 'UEDITOR_URL_PREFIX'):
             controllerUrl = settings.UEDITOR_URL_PREFIX + controllerUrl
         uSettings["settings"].update({
             "serverUrl": controllerUrl % urlencode(self._upload_settings)
         })
-        
         # 生成事件侦听
         if self.event_handler:
             uSettings["bindEvents"] = self.event_handler.render(editor_id)
